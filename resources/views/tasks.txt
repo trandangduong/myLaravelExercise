@@ -1,0 +1,12 @@
+Day 1
+> Install PHP 7.4 from https://windows.php.net/download#php-7.4
+> Access Laravel 8.x from https://laravel.com/docs/8.x
+> Install Composer from https://getcomposer.org/
+https://toidicode.com/laravel-la-gi-cach-cai-dat-laravel-1.html
+>> Sourecode Laravel: https://github.com/laravel/laravel
+> Learn Laravel 5.8 - From The Ground Up on youtube
+>> Episode 1 to 5
+ Questions
+ 1. How to merge my laravel project with myGithub
+ myGithub: https://github.com/trandangduong/Laravel
+ 2. 
