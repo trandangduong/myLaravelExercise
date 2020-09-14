@@ -5,8 +5,14 @@ Day 1
 https://toidicode.com/laravel-la-gi-cach-cai-dat-laravel-1.html
 >> Sourecode Laravel: https://github.com/laravel/laravel
 > Learn Laravel 5.8 - From The Ground Up on youtube
->> Episode 1 to 5
- Questions
- 1. How to merge my laravel project with myGithub
- myGithub: https://github.com/trandangduong/Laravel
- 2. 
+>> Episode 1 - completed
+>> Episode 2 - completed
+>> Episode 3 - completed
+>> Episode 4 - completed and do not understand.
+>> Episode 5 - 
+
+ *Problems:
+ 1. How to merge my laravel project with myGithub?
+ myGithub: https://github.com/trandangduong/myLaravelExercise
+ >> Resolved at 2h10PM
+ 2. Episode 4, get problem with $customers.
