@@ -27,7 +27,7 @@ Route::get('customers',function(){
         'customers' => $customers,
     ]);
 });
-
+ 
 /* Route::get('contact', function () {
     return view('contact');
 });
