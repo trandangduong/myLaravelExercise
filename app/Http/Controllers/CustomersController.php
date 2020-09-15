@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Controllers;
 
 class CustomersController extends Controller
 {
@@ -16,5 +17,5 @@ class CustomersController extends Controller
         return view ('internals.customers', [
             'customers' => $customers,
         ]);
-    }
+}
 }
