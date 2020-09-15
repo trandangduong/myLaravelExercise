@@ -1,8 +1,6 @@
 <?php
-
+use App\Http\Controllers\CustomersController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\CustomersController;
-use App\Http\Controllers;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +14,6 @@ use App\Http\Controllers;
 
 Route::view('/', 'welcome');
 Route::view('contact', 'contact');
+Route::view('home', 'home');
 Route::view('about', 'about');
-
-Route::get('customers', [CustomersController::class, 'list']);
-
+Route::get('customers',[CustomersController::class,'list']);
