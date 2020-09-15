@@ -1,9 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>HOME</h1>
+   
+    <h1>WELCOME TO LARAVEL</h1>
 
-    <p>I want to master Laravel.</p>
-    <p>Fighting</p>
 @endsection
-
