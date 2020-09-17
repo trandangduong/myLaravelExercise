@@ -18,6 +18,7 @@ class CustomersController extends Controller
     {
         //
     }
+    /* List all customers */
     public function list()
     {
         $customers = Customer::all();
@@ -25,6 +26,22 @@ class CustomersController extends Controller
         return view ('internals.customers', [
             'customers' => $customers,
         ]);
+    }
+    /*  */
+    public function store()
+    {
+        $data = request()->validate([
+            'name'=> 'required|min:3|string',
+            'email'=> 'required|email'
+        ]);
+
+        $customer = new Customer();
+        $customer->name = request('name');
+        $customer->email = request('email');
+        $customer->save();
+        
+        return back();
+        //dd(request('name'));
     }
     /**
      * Show the form for creating a new resource.
@@ -42,11 +59,6 @@ class CustomersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
-
     /**
      * Display the specified resource.
      *
