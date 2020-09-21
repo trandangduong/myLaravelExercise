@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $guarded = [''];
-    
-    public function company(){
-        return $this->belongsTo(Company::class);
-    }
 
+    public function getActiveAttribute($attribute)
+    {
+
+        return[1=>'Active',0=>'Inactive',][$attribute];
+    }
     public function scopeActive($query)
     {
         return $query->where('active', 1);
@@ -22,4 +23,9 @@ class Customer extends Model
     {
         return $query->where('active', 0);
     }
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
+
 }

@@ -6,7 +6,6 @@ use App\Models\Company;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
-
 class CustomersController extends Controller
 {
     /**
@@ -16,15 +15,14 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $activeCustomers = Customer::active()->get();
-        $inactiveCustomers = Customer::inactive()->get();
-        $companies = Company::all();
-        return view ('customers.index', compact('activeCustomers', 'inactiveCustomers', 'companies'));
+        $customers = Customer::all();
+        return view('customers.index',compact('customers'));
     }
 
     public function create()
     {
-        return view('customers.create');
+        $companies = Company::all();
+        return view('customers.create',compact('companies'));
     }
 
     public function store()
@@ -36,50 +34,32 @@ class CustomersController extends Controller
             'company_id'=> 'required',
         ]);
 
-        $customer = Customer::create($data);
+        Customer::create($data);
         
-        return back();
-        //dd(request('name'));
+        return redirect('customers');
     }
     
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Customer $customer)
     {
-        //
+        return view('customers.show',compact('customer'));
+    } 
+
+    public function edit(Customer $customer)
+    {
+        $companies = Company::all();
+        return view('customers.edit',compact('customer','companies'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(Customer $customer)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $data = request()->validate([
+            'name'=> 'required|min:3|string',
+            'email'=> 'required|email',
+            'active'=> 'required',
+            'company_id'=> 'required',
+        ]);
+        $customer->update($data);
+        return redirect('customers/'.$customer->id);
     }
 
     /**
