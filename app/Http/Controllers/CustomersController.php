@@ -21,20 +21,10 @@ class CustomersController extends Controller
         $companies = Company::all();
         return view ('customers.index', compact('activeCustomers', 'inactiveCustomers', 'companies'));
     }
-<<<<<<< HEAD
 
     public function create()
     {
         return view('customers.create');
-=======
-    /* List all customers */
-    public function list()
-    {
-        $activeCustomers = Customer::where('active',1)->get();
-        $inactiveCustomers = Customer::where('active',0)->get();
-
-        return view ('internals.customers', compact('activeCustomers','inactiveCustomers'));
->>>>>>> 683782c40477b87c1f69a6fc2268282c422ba394
     }
 
     public function store()
@@ -43,20 +33,10 @@ class CustomersController extends Controller
             'name'=> 'required|min:3|string',
             'email'=> 'required|email',
             'active'=> 'required',
-<<<<<<< HEAD
             'company_id'=> 'required',
         ]);
 
         $customer = Customer::create($data);
-=======
-        ]);
-
-        $customer = new Customer();
-        $customer->name = request('name');
-        $customer->email = request('email');
-        $customer->active = request('active');
-        $customer->save();
->>>>>>> 683782c40477b87c1f69a6fc2268282c422ba394
         
         return back();
         //dd(request('name'));
