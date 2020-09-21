@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Http\Controllers;
 
 
 class CustomersController extends Controller
@@ -16,43 +16,32 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        //
+        $activeCustomers = Customer::active()->get();
+        $inactiveCustomers = Customer::inactive()->get();
+        $companies = Company::all();
+        return view ('customers.index', compact('activeCustomers', 'inactiveCustomers', 'companies'));
     }
-    /* List all customers */
-    public function list()
-    {
-        $customers = Customer::all();
 
-        return view ('internals.customers', [
-            'customers' => $customers,
-        ]);
+    public function create()
+    {
+        return view('customers.create');
     }
-    /*  */
+
     public function store()
     {
         $data = request()->validate([
             'name'=> 'required|min:3|string',
-            'email'=> 'required|email'
+            'email'=> 'required|email',
+            'active'=> 'required',
+            'company_id'=> 'required',
         ]);
 
-        $customer = new Customer();
-        $customer->name = request('name');
-        $customer->email = request('email');
-        $customer->save();
+        $customer = Customer::create($data);
         
         return back();
         //dd(request('name'));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
