@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\ContactFormController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home');
 
-Route::get('customers/create',[ContactFormController::class,'create']);
+Route::get('contact',[ContactFormController::class,'create']);
 
 Route::view('about', 'about');
 
