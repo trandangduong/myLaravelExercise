@@ -11,7 +11,7 @@
     
     <div class="row">
         <div class="col-12">
-            <form action="/customers/{{$customer->id}}" method="PATCH">
+            <form action="/customers/{{$customer->id}}" method="POST">
             @method('PATCH')
             @include('customers.form')
 

@@ -22,20 +22,14 @@ class CustomersController extends Controller
     public function create()
     {
         $companies = Company::all();
-        return view('customers.create',compact('companies'));
+        $customer = new Customer();
+        return view('customers.create',compact('companies','customer'));
     }
 
     public function store()
     {
-        $data = request()->validate([
-            'name'=> 'required|min:3|string',
-            'email'=> 'required|email',
-            'active'=> 'required',
-            'company_id'=> 'required',
-        ]);
-
-        Customer::create($data);
-        
+        Customer::create($this->validatesRequests());
+                     
         return redirect('customers');
     }
     
@@ -47,29 +41,27 @@ class CustomersController extends Controller
     public function edit(Customer $customer)
     {
         $companies = Company::all();
-        return view('customers.edit',compact('customer','companies'));
+        return view('customers.edit', compact('customer','companies'));
     }
 
     public function update(Customer $customer)
     {
-        $data = request()->validate([
+        $customer->update($this->validatesRequests());
+        return redirect('customers/'. $customer->id);
+    }
+ 
+    public function destroy(Customer $customer)
+    {
+        $customer->delete();
+        return redirect('customers');
+    }
+
+    private function validatesRequests(){
+        return request()->validate([
             'name'=> 'required|min:3|string',
             'email'=> 'required|email',
             'active'=> 'required',
             'company_id'=> 'required',
         ]);
-        $customer->update($data);
-        return redirect('customers/'.$customer->id);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
