@@ -14,6 +14,10 @@
     <div class="container">
       @include('nav')
 
+      <div class="alert alert-primary" role="alert">
+        <strong></strong>
+      </div>
+
       @yield('content')
     </div>
 
