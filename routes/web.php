@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home');
 
 Route::get('contact',[ContactFormController::class,'create']);
+Route::post('contact',[CustomersController::class,'store']);
 
 Route::view('about', 'about');
 
