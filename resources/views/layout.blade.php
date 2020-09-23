@@ -13,10 +13,12 @@
   <body>
     <div class="container">
       @include('nav')
-
-      <div class="alert alert-primary" role="alert">
-        <strong></strong>
-      </div>
+      
+      @if (session()->has('message'))
+        <div class="alert alert-primary" role="alert">
+          <strong>Success</strong> {{session()->get('message')}}
+        </div>
+      @endif
 
       @yield('content')
     </div>
