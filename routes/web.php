@@ -2,6 +2,8 @@
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\ContactFormController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +29,18 @@ Route::get('customers/{customer}',[CustomersController::class,'show']);
 Route::get('customers/{customer}/edit',[CustomersController::class,'edit']);
 Route::patch('customers/{customer}',[CustomersController::class,'update']);
 Route::delete('customers/{customer}',[CustomersController::class,'destroy']); */
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -8,5 +8,3 @@
     <p>I want to master Laravel.</p>
     <p>Fighting</p>
 @endsection
-
-

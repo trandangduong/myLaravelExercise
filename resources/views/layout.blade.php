@@ -16,7 +16,7 @@
       
       @if (session()->has('message'))
         <div class="alert alert-primary" role="alert">
-          <strong>Success</strong> {{session()->get('message')}}
+          <strong>Success:</strong> {{session()->get('message')}}
         </div>
       @endif
 
