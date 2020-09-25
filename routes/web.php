@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Auth;
 Route::view('/', 'home');
 Route::view('about', 'about');
 
-Route::get('contact',[ContactFormController::class,'create']);
-Route::post('contact',[ContactFormController::class,'store']);
+Route::get('contact',[ContactFormController::class,'create'])->name('contact.create');
+Route::post('contact',[ContactFormController::class,'store'])->name('contact.store');
 
 Route::resource('customers', CustomersController::class);
 /* Route::get('customers',[CustomersController::class,'index']);
@@ -32,15 +32,7 @@ Route::delete('customers/{customer}',[CustomersController::class,'destroy']); */
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth:sanctum', 'verified'])->
+                get('/dashboard', function () {return view('dashboard');})->name('dashboard');
