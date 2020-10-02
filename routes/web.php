@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::view('/', 'home');
-Route::view('about', 'about');
+Route::view('about', 'about')->middleware('test');
 
 Route::get('contact',[ContactFormController::class,'create'])->name('contact.create');
 Route::post('contact',[ContactFormController::class,'store'])->name('contact.store');
