@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Events\NewCustomerHasRegisteredEvent;
+use Intervention\Image\Facades\Image;
 use App\Mail\WelcomeNewUserMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -31,7 +32,9 @@ class CustomersController extends Controller
 
     public function store()
     {
-        $customer = Customer::create($this->validatesRequests());
+        $customer = Customer::create($this->validatesRequest());
+
+        $this->storeImage($customer);
 
         event(new NewCustomerHasRegisteredEvent($customer));
 
@@ -51,7 +54,8 @@ class CustomersController extends Controller
 
     public function update(Customer $customer)
     {
-        $customer->update($this->validatesRequests());
+        $customer->update($this->validatesRequest());
+        $this->storeImage($customer);
         return redirect('customers/'. $customer->id);
     }
  
@@ -61,12 +65,27 @@ class CustomersController extends Controller
         return redirect('customers');
     }
 
-    private function validatesRequests(){
+    private function validatesRequest()
+    {
         return request()->validate([
             'name'=> 'required|min:3|string',
             'email'=> 'required|email',
             'active'=> 'required',
             'company_id'=> 'required',
+            'image'=> 'sometimes|file|image|max:5000',
         ]);
+    }
+
+    private function storeImage($customer)
+    {
+        if(request()->has('image'))
+        {
+            $customer->update([
+                'image'=>request()->image->store('uploads', 'public'),
+            ]);
+
+            $image = Image::make(public_path('storage'. $customer->image))->fit(300,300);
+            $image->save();
+        }
     }
 }
